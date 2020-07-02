@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { createstudent, addcourses } from '../models/form-model';
 import { DataService } from '../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { identifierModuleUrl } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-create-student',
@@ -29,7 +29,7 @@ datas:any
       gender:['',Validators.required],
       branch:['',Validators.required],
       course:['',Validators.required],
-      teachername:['',Validators.required],
+      batchname:['',Validators.required],
       dateofbirth:['',Validators.required],
       address:['',Validators.required]
     });

@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
     if (!createstudents || !searchterm) {
        return createstudents  
     }
-    return createstudents.filter(data=>data.name.toLowerCase().indexOf(searchterm.toLowerCase())!== -1) 
+    return createstudents.filter(data=>data.batchname.toLowerCase().indexOf(searchterm.toLowerCase())!== -1);
    }
   
 }

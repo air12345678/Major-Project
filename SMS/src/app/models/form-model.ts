@@ -25,7 +25,7 @@ export class createstudent{
     gender:string;
     branch:string;
     course:string;
-    teachername:string;
+    batchname:string;
     dateofbirth:Date;
     address:string;
 }
@@ -44,7 +44,7 @@ export class createteacher{
 export class addcourses{
     courseid:string;
     coursename:string;
-    teachername:string;
+    // teachername:string;
 }
 
 export class change{

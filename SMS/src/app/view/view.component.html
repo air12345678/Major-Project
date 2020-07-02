@@ -17,7 +17,7 @@
           <th>Email</th>
           <th>Branch</th>
           <th>Course</th>
-          <th>ContactNo</th>
+          <th>Batch</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@
           <td>{{d.email}}</td>
           <td>{{d.branch}}</td>
           <td>{{d.course}}</td>
-          <td>{{d.contactno}}</td>
+          <td>{{d.batchname}}</td>
           <td><button class="btn btn-primary" data-toggle="modal" 
             data-target="#myModal"(click)="update(d)">update</button></td>
           <td><button class="btn btn-primary" (click)="delete(d)">Delete</button></td>
@@ -148,13 +148,13 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
            
-                      <label for="inputteacherName">Teacher Name</label>
-                      <input type="text" class="form-control"name="teachername" id="inputteacherName" placeholder="Teacher Name"
-                      formControlName="teachername"[ngClass]="{'is-invalid':submitted &&
-                      f.teachername.errors}"[(ngModel)]="tobeupdated.teachername" >
-                      <div *ngIf="submitted && f.teachername.errors"
+                      <label for="inputteacherName">Batch Name</label>
+                      <input type="text" class="form-control"name="batchname" id="inputbatchName" placeholder="Batch Name"
+                      formControlName="batchname"[ngClass]="{'is-invalid':submitted &&
+                      f.batchname.errors}"[(ngModel)]="tobeupdated.batchname" >
+                      <div *ngIf="submitted && f.batchname.errors"
                       class="invalid-feedback">
-                  <div *ngIf="f.teachername.errors.required">Teacher Name is required</div></div>
+                  <div *ngIf="f.batchname.errors.required">Batch Name is required</div></div>
                   </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <label for="inputbirthday">Date Of Birth</label>

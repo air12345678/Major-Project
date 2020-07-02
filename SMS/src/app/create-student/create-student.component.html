@@ -96,13 +96,13 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
            
-            <label for="inputteacherName">Teacher Name</label>
-            <input type="text" class="form-control"name="teachername" id="inputteacherName" placeholder="Teacher Name"
-            formControlName="teachername"[ngClass]="{'is-invalid':submitted &&
-            f.teachername.errors}" >
-            <div *ngIf="submitted && f.teachername.errors"
+            <label for="inputteacherName">Batch Name</label>
+            <input type="text" class="form-control"name="batchname" id="inputbatchName" placeholder="Batch Name"
+            formControlName="batchname"[ngClass]="{'is-invalid':submitted &&
+            f.batchname.errors}" >
+            <div *ngIf="submitted && f.batchname.errors"
             class="invalid-feedback">
-        <div *ngIf="f.teachername.errors.required">Teacher Name is required</div></div>
+        <div *ngIf="f.batchname.errors.required">Batch Name is required</div></div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <label for="inputbirthday">Date Of Birth</label>

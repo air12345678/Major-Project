@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SMS"
+    }
+  },
+  "defaultProject": "SMS",
+  "cli": {
+    "analytics": "fa8a5d43-8d47-4389-8844-276ed7cd9581"
+  }
 }
