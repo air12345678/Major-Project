@@ -1,0 +1,36 @@
+.container{
+        
+    max-width: 490px;
+    border-radius: 20px;
+   margin: auto;
+    background:skyblue;
+    box-sizing: border-box;
+    padding: 40px;
+    color:white;
+    margin-top: 100px;
+}
+h2{
+text-align: center;
+}
+body{
+background-color: whitesmoke;
+}
+.btn btn-default{
+position: relative;
+right: 40px;
+margin-left: 80px;
+}
+.avatar1{
+        width: 80px;
+        height:80px;
+        position: relative;
+        overflow: hidden;
+        top :calc(-120px/2);
+        left:calc(-200% -200%);
+        border-radius: 50%;
+        margin-left: 170px;
+    }
+
+    
+
+

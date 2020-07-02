@@ -1,0 +1,194 @@
+
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search..."
+    [(ngModel)]="searchterm">
+      </div>
+
+<div *ngIf="(datas | filter:searchterm).length==0">
+  <h3>Oh no</h3>
+  <p>No students found <span *ngIf="searchterm"> with search "{{searchterm}}"</span> </p>
+</div>
+<div class="container">        
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Branch</th>
+          <th>Course</th>
+          <th>ContactNo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of datas | filter:searchterm">
+          <td>{{d.id}}</td>
+          <td>{{d.name}}</td>
+          <td>{{d.email}}</td>
+          <td>{{d.branch}}</td>
+          <td>{{d.course}}</td>
+          <td>{{d.contactno}}</td>
+          <td><button class="btn btn-primary" data-toggle="modal" 
+            data-target="#myModal"(click)="update(d)">update</button></td>
+          <td><button class="btn btn-primary" (click)="delete(d)">Delete</button></td>
+          <td><button class="btn btn-primary" (click)="details(d)">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div *ngIf="tobeupdated" class="container-fluid">
+              <form novalidate [formGroup]="studentForm" (ngSubmit)="onsubmit()">
+                <div class="row">
+                
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        
+                        <label for="inputId">Student Id</label>
+                        <input type="text" class="form-control" name = "id" id="inputId" placeholder="Student Id"
+                        formControlName="id" [ngClass]="{'is-invalid':submitted &&
+                    f.id.errors}" [(ngModel)]="tobeupdated.id">
+                    <div *ngIf="submitted && f.id.errors"
+                    class="invalid-feedback">
+                <div *ngIf="f.id.errors.required">Id is required</div></div>
+                   
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                     
+                        <label for="inputName">Student Name</label>
+                        <input type="text" class="form-control"name = "name" id="inputName" placeholder="Student Name"
+                        formControlName="name" [ngClass]="{'is-invalid':submitted &&
+                        f.name.errors}"[(ngModel)]="tobeupdated.name">
+                        <div *ngIf="submitted && f.name.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                       
+                        <label for="inputfName">Father Name</label>
+                        <input type="text" class="form-control"name="fathername" id="inputfName" placeholder="Father Name"
+                        formControlName="fathername"[ngClass]="{'is-invalid':submitted &&
+                        f.fathername.errors}"[(ngModel)]="tobeupdated.fathername" >
+                        <div *ngIf="submitted && f.fathername.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.fathername.errors.required">Father Name is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                     
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" 
+                        formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"[(ngModel)]="tobeupdated.email">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                 
+                        <label for="inputMobile">Contact No</label>
+                        <input type="tel" class="form-control" name="contactno" id="inputMobile" placeholder="Contact No"
+                        formControlName="contactno" [ngClass]="{ 'is-invalid': submitted && f.contactno.errors }" [(ngModel)]="tobeupdated.contactno">
+                        <div *ngIf="submitted && f.contactno.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.contactno.errors.required">Contact Number is required</div></div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputGender">Gender</label>
+                        <select  class="form-control" name="gender" formControlName="gender"
+                        [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"[(ngModel)]="tobeupdated.gender">
+                            <option value="Select">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div *ngIf="submitted && f.gender.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.gender.errors.required">Gender is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputBranch">Branch</label>
+                        <select  class="form-control" name="branch" formControlName="branch"
+                        [ngClass]="{ 'is-invalid': submitted && f.branch.errors }"[(ngModel)]="tobeupdated.branch">
+                            <option value="Select">Select</option>
+                            <option value="CS">CS</option>
+                            <option value="IT">IT</option>
+                            <option value="EC">EC</option>
+                            <option value="EE">EE</option>
+                            <option value="ME">ME</option>
+                        </select>
+                        <div *ngIf="submitted && f.branch.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.branch.errors.required">Branch is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputCourses">Courses</label>
+                        <select  class="form-control" name="course" formControlName="course"
+                        [ngClass]="{ 'is-invalid': submitted && f.course.errors }"[(ngModel)]="tobeupdated.course">
+                            <option value="Select">Select</option>
+                            <option value="Android">Android</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Linux">Linux</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Python">Python</option>
+                            <option value="Web Development">Web Development</option>
+                        </select>
+                        <div *ngIf="submitted && f.course.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.course.errors.required">Course is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+           
+                      <label for="inputteacherName">Teacher Name</label>
+                      <input type="text" class="form-control"name="teachername" id="inputteacherName" placeholder="Teacher Name"
+                      formControlName="teachername"[ngClass]="{'is-invalid':submitted &&
+                      f.teachername.errors}"[(ngModel)]="tobeupdated.teachername" >
+                      <div *ngIf="submitted && f.teachername.errors"
+                      class="invalid-feedback">
+                  <div *ngIf="f.teachername.errors.required">Teacher Name is required</div></div>
+                  </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputbirthday">Date Of Birth</label>
+                        <input type="date" id="inputbirthday" class="form-control" name="dateofbirth"
+                        formControlName="dateofbirth" [ngClass]="{ 'is-invalid': submitted && f.dateofbirth.errors }"[(ngModel)]="tobeupdated.dateofbirth">
+                        <div *ngIf="submitted && f.dateofbirth.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.dateofbirth.errors.required">DOB is required</div></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label for="inputAddress">Address</label>
+                        <textarea name="address" class="form-control" id="inputAddress" 
+                        placeholder="Address" formControlName="address"
+                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }"[(ngModel)]="tobeupdated.address"></textarea>
+                        <div *ngIf="submitted && f.address.errors"
+                        class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Address is required</div></div>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                
+                </div>
+            </form>
+              </div>
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+  

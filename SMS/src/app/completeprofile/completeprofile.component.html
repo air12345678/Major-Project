@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="card" *ngFor="let d of datas">
+      <div class="card-header">Hello {{d.name}}</div>
+      <div class="card-body">
+          <div class="row" *ngIf="role=='Student'">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                 <label>Id</label>:{{d.id}}
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Father Name</label>:{{d.fathername}}
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Email</label>:{{d.email}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Contact No</label>:{{d.contactno}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>gender</label>:{{d.gender}}
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+               <label>Branch</label>:{{d.branch}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Course</label>:   {{d.course}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Teacher Name</label>:   {{d.teachername}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Date Of Birth</label>:{{d.dateofbirth}} 
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <label>Address</label>:{{d.address}} 
+              </div>
+          </div>
+          <div class="row" *ngIf="role=='Teacher'">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <label>Id</label>:{{d.id}}
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>Email</label>:{{d.email}} 
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>Contact No</label>:{{d.contactno}} 
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>gender</label>:{{d.gender}}
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>Course</label>:   {{d.course}} 
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>Date Of Birth</label>:{{d.dateofbirth}} 
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-12">
+             <label>Address</label>:{{d.address}} 
+           </div>
+          </div>
+         
+    </div>
+    </div>
+    </div>
+      

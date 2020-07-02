@@ -1,0 +1,20 @@
+.card{
+    border: 2px solid white;
+}
+.card-header{
+    text-align:center;
+    background-color:pink;
+    font-weight: bold;
+ }
+ /* .card-body{
+ text-align:center
+ } */
+ label{
+    font-weight: bold;
+    font-style: italic;
+    margin-left: auto
+ }
+ td{
+     font-weight: bold;
+ }
+ 

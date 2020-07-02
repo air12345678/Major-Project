@@ -1,0 +1,19 @@
+<div class="container">        
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Course Id</th>
+          <th>Course Name</th>
+          <th>Teacher Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of datas">
+          <td>{{d.courseid}}</td>
+          <td>{{d.coursename}}</td>
+          <td>{{d.teachername}}</td>
+          <button class="btn btn-primary" (click)="delete(d)">Delete</button>
+             </tr>
+      </tbody>
+    </table>
+    </div>

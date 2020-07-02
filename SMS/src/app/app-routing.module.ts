@@ -1,0 +1,49 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AboutComponent } from './about/about.component';
+import { ContactusComponent } from './contactus/contactus.component';
+
+import { ViewComponent } from './view/view.component';
+import { CreateStudentComponent } from './create-student/create-student.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CompleteprofileComponent } from './completeprofile/completeprofile.component';
+import { AuthguardService } from './services/authguard.service';
+import { CreateteacherComponent } from './createteacher/createteacher.component';
+import { ViewteachersComponent } from './viewteachers/viewteachers.component';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { ViewcourseComponent } from './viewcourse/viewcourse.component';
+import { DetailsprofileComponent } from './detailsprofile/detailsprofile.component';
+import { ChangeComponent } from './change/change.component';
+
+
+
+const routes: Routes = [
+      {path:'',component:HomeComponent},
+      {path:'about',component:AboutComponent},
+      {path:'contactus',component:ContactusComponent},
+      {path:'login',component:LoginComponent},
+      {path:'change',component:ChangeComponent},
+      {path:'dashboard',component:DashboardComponent,
+    children:[
+      {path:'create-student',component:CreateStudentComponent,canActivate:[AuthguardService]},
+      {path:'createteacher',component:CreateteacherComponent,canActivate:[AuthguardService]},
+      {path:'view',component:ViewComponent,canActivate:[AuthguardService]},
+      {path:'viewteachers',component:ViewteachersComponent,canActivate:[AuthguardService]},
+      {path:'profile',component:ProfileComponent},
+      {path:'completeprofile',component:CompleteprofileComponent},
+      {path:'add-course',component:AddCourseComponent},
+      {path:'viewcourse',component:ViewcourseComponent},
+      {path:'detailsprofile',component:DetailsprofileComponent,canActivate:[AuthguardService]}
+    ]},
+      
+      
+];    
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
