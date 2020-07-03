@@ -12,8 +12,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ViewComponent implements OnInit {
 datas
+index:number
 role;
 searchterm:string;
+prop:string
 createstudents:createstudent
 studentForm :FormGroup;
 createstudent:createstudent;
@@ -81,5 +83,9 @@ details(d){
   this.router.navigate(['/dashboard/detailsprofile'],
   {queryParams:{user:JSON.stringify(d)}})
 }
+
+
+
+
 
 }

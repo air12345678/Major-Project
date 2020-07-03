@@ -1,27 +1,30 @@
 
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search..."
-    [(ngModel)]="searchterm">
+    [(ngModel)]="prop">
       </div>
 
-<div *ngIf="(datas | filter:searchterm).length==0">
+<div *ngIf="(datas | filter:prop).length==0">
   <h3>Oh no</h3>
-  <p>No students found <span *ngIf="searchterm"> with search "{{searchterm}}"</span> </p>
+  <p>No students found <span *ngIf="prop"> with search "{{prop}}"</span> </p>
 </div>
 <div class="container">        
-    <table class="table table-striped">
+    <table class="table table-striped css-serial">
       <thead>
         <tr>
+          <th> Sr no</th>
           <th>Id</th>
           <th>Name</th>
           <th>Email</th>
           <th>Branch</th>
           <th>Course</th>
           <th>Batch</th>
+          <th>Operations</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let d of datas | filter:searchterm">
+        <tr *ngFor="let d of datas | filter:prop">
+          <td>&nbsp;</td>
           <td>{{d.id}}</td>
           <td>{{d.name}}</td>
           <td>{{d.email}}</td>
