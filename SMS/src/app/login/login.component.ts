@@ -145,14 +145,14 @@ roles=['Admin','Student','Teacher']
     this.signup = this.signupForm.value;
     this.ds.signup(this.signup)
     .subscribe((d)=>{
-      if(d.status = "Ok"){
+      if(d.Status == "Ok"){
         alert("Signup Successfully");
         console.log(this.sgnp);
         this.sgnp.nativeElement.click()
         // this.router.navigate(['/']);
       }
       else{
-        alert("Error");
+        alert(d.resultData);
       }
     })
   }

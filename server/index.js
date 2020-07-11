@@ -5,8 +5,53 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 var nodemailer = require('nodemailer');
-app.use(cors());
+var multer = require('multer');
+var fs = require('fs');
+const path = require('path');
 
+var storage = multer.diskStorage({
+  destination:function(req,file,cb){
+    console.log("in destination");
+    cb(null, 'uploads')
+  },
+  filename:function(req,file,cb){
+    console.log(file);
+    var ext = file.originalname.split('.').pop();
+    console.log(ext);
+   console.log("line 21" );
+   console.log(req.body)
+    if(!req.hasTextDataProcessed){
+      var collection = connection.db('smsdb').collection('assignments');
+      collection.insert(req.body,(err,r)=>{
+        if(!err){
+          console.log(r);
+          var insertedId = r.insertedIds['0'];
+          
+          console.log("inserted id is returned as->"+insertedId)
+          req.hasTextDataProcessed = true;
+          req.insertedId = insertedId; 
+          
+          req.assignmentCtr = 1;
+          cb(null,req.insertedId+"_"+file.fieldname+"_"+req[file.fieldname+'Ctr']++ +"."+ext);
+         console.log(req.courseid)
+        }
+        else{
+          return null;
+        }
+      })
+    }
+    else{
+      cb(null,req.insertedId+"_"+file.fieldname+"_"+req[file.fieldname+'Ctr']++ +"."+ext);
+    }
+  }
+})
+
+var upload = multer({storage:storage})
+var app = express();
+app.use(cors());
+app.use(express.static(path.join(__dirname,'uploads')))
+
+// //////////////////DataBase Conncetion///////////////////////////////////////
 let client = new MongoClient("mongodb://localhost:27017/smsdb",{useNewurlParser:true});
 var connection;
 client.connect((err,con)=>{
@@ -18,21 +63,56 @@ client.connect((err,con)=>{
       console.log("Database chould not be connected");
   }
 });
-
+// //////////////////End of DataBase Conncetion///////////////////////////////////////
 app.get('/',(req,res)=>{
     res.send("Hello From Server");
 })
+app.post('/data-with-file',
+upload.fields([{name:'assignment',maxcount:1}]),
+                            
+(req,res)=>{
+  console.log("in last"); 
+  res.send({status:"ok"})   
+  });
+app.get('/get-assignments',(req,res)=>{
+  // console.log(req.body);
+  var collection=connection.db('smsdb').collection('assignments');
+  collection.find().toArray((err,docs)=>{
+      if(!err)
+      {
+          res.send({Status:"Ok",resultData:docs});
+        
+      }
+      else
+      {
+          res.send({Status:"failed",resultData:err});
+      }
+  })
+})
 app.post('/sign-up',bodyparser.json(),(req,res)=>{
     console.log(req.body);
+    
     var collection =connection.db('smsdb').collection('users');
-     collection.insert(req.body,(err,r)=>{
-     if(!err){
-        res.send({status:"Ok"});
-     }
-     else{
-        res.send({status:"failed"});
-       }
-     })
+    collection.find({email:req.body.email}).toArray((err,docs)=>{
+      if(!err && docs.length>0)
+      {
+          res.send({Status:"failed",resultData:"Email Already Registered"});
+      }
+      else
+      {
+      collection.insert(req.body,(err,r)=>{
+      if(!err)
+      {
+        sendMail("kkgupta221997@gmail.com", "ijcnsdglzlkujfgr" ,req.body.email, "Student Portal Signup Successfully", `<h3>Hi</h3><br><h6>Congratulations your sign up is successful on Student Portal.</h6>` )
+          res.send({Status:"Ok"});
+      }
+      else
+      {
+          res.send({Status:"failed"});
+      }
+  })
+      }
+  })
    
 })
 app.post('/login',bodyparser.json(), (req,res)=>{
@@ -43,44 +123,29 @@ app.post('/login',bodyparser.json(), (req,res)=>{
     collection.find(query).toArray((err,docs)=>{
         if(!err && docs.length > 0){
             console.log(docs)
-            // res.status(200).send({resultData:docs});
             res.send({status:"Ok",resultData:docs})
         }
         else{
-            // res.status(401).send('Inavlid Id Or password')
             res.send({status:"failed",resultData:err})
         }
        
     })
 })
-app.post('/email',bodyparser.json(),(req,res)=>{
-    console.log("request came");
-    console.log(req.body);
-    var user =req.body;
-    console.log(user);
-   
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'kkgupta221997@gmail.com',
-          pass: 'air@1234'
-        }
-      });
-      
-      var mailOptions = {
-        from: 'kkgupta221997@gmail.com',
-        to: user.email,
-        subject: 'Welcome',
-        text: 'Thankyou for visiting us website'
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
+app.post('/forgot-password',bodyparser.json(),(req,res)=>{
+  console.log(req.body);
+  var collection =connection.db('smsdb').collection('users');
+  var query = {email:req.body.email}
+  collection.find({email:req.body.email}).toArray((err,docs)=>{
+    if(!err && docs.length > 0){
+      res.send({Status:"Ok",resultData:docs});
+      sendMail("kkgupta221997@gmail.com", "ijcnsdglzlkujfgr" ,req.body.email, "Forgot Password",
+       '<h3>Hi</h3><br><p> your password is:</p>'+ JSON.stringify(docs[0].password))
+    }
+    else
+    {
+        res.send({Status:"failed",resultData:err});
+    }
+  })
 })
 app.post('/create-student',bodyparser.json(),(req,res)=>{
   console.log(req.body);
@@ -269,19 +334,44 @@ collection.remove({_id:ObjectId(req.body._id)},(err,r)=>{
   }
 })
 })
-app.post('/contactus', bodyparser.json(),(req,res) => {
-    var collection = connection.db("smsdb").collection("users");
-    console.log("contacted");
-    console.log(req.body);
-    collection.insert(req.body , (err , docs ) => {
-        if(!err)
-        {
-          console.log(res.send({msg: "Contact Successful" , status:"Ok" ,desc:"All ok"}));
-        }
-        else
-        {
-            console.log(res.send({msg: "Contact Failed" , status:"not ok" ,desc:"Try Again"}));
-        }
-    });
-})
+
+
 app.listen(3000,()=>{console.log("serve is listning on port 3000")});
+
+function sendMail(from, appPassword, to, subject,  htmlmsg)
+{
+    let transporter=nodemailer.createTransport(
+        {
+            host:"smtp.gmail.com",
+            port:587,
+            secure:false,
+            auth:
+            {
+             //  user:"weforwomen01@gmail.com",
+             //  pass:""
+             user:from,
+              pass:appPassword
+              
+    
+            }
+        }
+      );
+    let mailOptions=
+    {
+       from:from ,
+       to:to,
+       subject:subject,
+       html:htmlmsg
+    };
+    transporter.sendMail(mailOptions ,function(error,info)
+    {
+      if(error)
+      {
+        console.log(error);
+      }
+      else
+      {
+        console.log('Email sent:'+info.response);
+      }
+    });
+}

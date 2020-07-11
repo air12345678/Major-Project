@@ -25,6 +25,7 @@ export class createstudent{
     gender:string;
     branch:string;
     course:string;
+    courseid:string;
     batchname:string;
     dateofbirth:Date;
     address:string;

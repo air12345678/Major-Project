@@ -68,5 +68,14 @@ getcourses():any{
 deletecourse(u):any{
   return this.http.post('http://localhost:3000/deletecourse',u);
 }
-
+postDataWithImage(d)
+{
+  return this.http.post('http://localhost:3000/data-with-file', d);
+}
+getassignments():any{
+  return this.http.get('http://localhost:3000/get-assignments');
+}
+forgotpassword(d:Login):any{
+  return this.http.post('http://localhost:3000/forgot-password',d);
+}
 }

@@ -23,6 +23,14 @@ import { ViewcourseComponent } from './viewcourse/viewcourse.component';
 import { DetailsprofileComponent } from './detailsprofile/detailsprofile.component'
 import { ChangeComponent } from './change/change.component';
 import { FilterTeacherPipe } from './pipes/filter-teacher.pipe';
+import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
+import { ViewAssignmentComponent } from './view-assignment/view-assignment.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AssignmentComponent } from './assignment/assignment.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +51,12 @@ import { FilterTeacherPipe } from './pipes/filter-teacher.pipe';
     ViewcourseComponent,
     DetailsprofileComponent,
     ChangeComponent,
-    FilterTeacherPipe
+    FilterTeacherPipe,
+    UploadAssignmentComponent,
+    ViewAssignmentComponent,
+    ForgotPasswordComponent,
+    AssignmentComponent
+   
   ],
   imports: [
     BrowserModule,

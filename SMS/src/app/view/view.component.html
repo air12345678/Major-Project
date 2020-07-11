@@ -3,7 +3,7 @@
     <input type="text" class="form-control" placeholder="Search..."
     [(ngModel)]="prop">
       </div>
-
+         
 <div *ngIf="(datas | filter:prop).length==0">
   <h3>Oh no</h3>
   <p>No students found <span *ngIf="prop"> with search "{{prop}}"</span> </p>
@@ -19,6 +19,7 @@
           <th>Branch</th>
           <th>Course</th>
           <th>Batch</th>
+
           <th>Operations</th>
         </tr>
       </thead>
@@ -31,6 +32,7 @@
           <td>{{d.branch}}</td>
           <td>{{d.course}}</td>
           <td>{{d.batchname}}</td>
+        
           <td><button class="btn btn-primary" data-toggle="modal" 
             data-target="#myModal"(click)="update(d)">update</button></td>
           <td><button class="btn btn-primary" (click)="delete(d)">Delete</button></td>
@@ -136,19 +138,31 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <label for="inputCourses">Courses</label>
                         <select  class="form-control" name="course" formControlName="course"
-                        [ngClass]="{ 'is-invalid': submitted && f.course.errors }"[(ngModel)]="tobeupdated.course">
+                        [ngClass]="{ 'is-invalid': submitted && f.course.errors }"
+                        [(ngModel)]="tobeupdated.course">
                             <option value="Select">Select</option>
-                            <option value="Android">Android</option>
-                            <option value="Data Science">Data Science</option>
-                            <option value="Linux">Linux</option>
-                            <option value="Machine Learning">Machine Learning</option>
-                            <option value="Python">Python</option>
-                            <option value="Web Development">Web Development</option>
+                            <option *ngFor = "let d of data">
+                              {{d.coursename}}
+                          </option>
                         </select>
                         <div *ngIf="submitted && f.course.errors"
                         class="invalid-feedback">
                     <div *ngIf="f.course.errors.required">Course is required</div></div>
                     </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <label for="inputCourseid">CourseId</label>
+                      <select  class="form-control" name="courseid" formControlName="courseid"
+                      [ngClass]="{ 'is-invalid': submitted && f.courseid.errors }"
+                      [(ngModel)]="tobeupdated.courseid">
+                           <option value="Select">Select</option>
+                          <option *ngFor = "let d of data">
+                              {{d.courseid}}
+                          </option>
+                      </select>
+                      <div *ngIf="submitted && f.courseid.errors"
+                      class="invalid-feedback">
+                  <div *ngIf="f.courseid.errors.required">CourseId is required</div></div>
+                  </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
            
                       <label for="inputteacherName">Batch Name</label>

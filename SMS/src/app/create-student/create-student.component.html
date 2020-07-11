@@ -8,8 +8,7 @@
             <input type="text" class="form-control" name = "id" id="inputId" placeholder="Student Id"
             formControlName="id" [ngClass]="{'is-invalid':submitted &&
         f.id.errors}">
-        <div *ngIf="submitted && f.id.errors"
-        class="invalid-feedback">
+        <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
     <div *ngIf="f.id.errors.required">Id is required</div></div>
        
         </div>
@@ -95,6 +94,19 @@
         <div *ngIf="f.course.errors.required">Course is required</div></div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
+            <label for="inputCourseid">CourseId</label>
+            <select  class="form-control" name="courseid" formControlName="courseid"
+            [ngClass]="{ 'is-invalid': submitted && f.courseid.errors }">
+                 <option value="Select">Select</option>
+                <option *ngFor = "let d of datas">
+                    {{d.courseid}}
+                </option>
+            </select>
+            <div *ngIf="submitted && f.courseid.errors"
+            class="invalid-feedback">
+        <div *ngIf="f.courseid.errors.required">CourseId is required</div></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
            
             <label for="inputteacherName">Batch Name</label>
             <input type="text" class="form-control"name="batchname" id="inputbatchName" placeholder="Batch Name"
@@ -112,6 +124,7 @@
             class="invalid-feedback">
         <div *ngIf="f.dateofbirth.errors.required">DOB is required</div></div>
         </div>
+    
         <div class="col-lg-12 col-md-12 col-sm-12">
             <label for="inputAddress">Address</label>
             <textarea name="address" class="form-control" id="inputAddress" 

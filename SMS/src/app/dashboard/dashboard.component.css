@@ -95,6 +95,11 @@
       margin-top:0vh;
     }
   }
+  @media (width: 768px) {
+.sidebar{
+  width:750px
+}
+  }
   /* end of navbar */
   
   /* cards */

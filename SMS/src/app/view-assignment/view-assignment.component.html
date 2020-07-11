@@ -1,0 +1,6 @@
+<!-- <button class="btn btn-primary" (click)="submit()">View Assignment</button> -->
+<div *ngFor="let a of assignment">
+<a href="http://localhost:3000/{{a._id}}_assignment_1.{{a.ext}}" download>Assignment
+<i class="fa fa-download" aria-hidden="true"></i></a><br>
+Desrciption: {{a.description}}
+</div>

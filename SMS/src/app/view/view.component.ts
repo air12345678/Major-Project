@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ViewComponent implements OnInit {
 datas
+data
 index:number
 role;
 searchterm:string;
@@ -45,6 +46,13 @@ submitted = false;
     dateofbirth:['',Validators.required],
     address:['',Validators.required]
   });
+  this.ds.getcourses()
+  .subscribe((d)=>{
+    if(d.status == "Ok"){
+      this.data = d.resultData;
+      console.log(this.data)
+    }
+  })
 }
 
 get f() {

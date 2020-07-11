@@ -1,0 +1,98 @@
+<!-- <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search..."
+    [(ngModel)]="prop">
+      </div>
+
+<div *ngIf="(datas | filter:prop).length==0">
+  <h3>Oh no</h3>
+  <p>No students found <span *ngIf="prop"> with search "{{prop}}"</span> </p>
+</div>
+<div class="container">        
+    <table class="table table-striped css-serial">
+      <thead>
+        <tr>
+          <th> Sr no</th>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Branch</th>
+          <th>Course</th>
+          <th>Batch</th>
+          <th>Assignments</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of datas | filter:prop">
+          <td>&nbsp;</td>
+          <td>{{d.id}}</td>
+          <td>{{d.name}}</td>
+          <td>{{d.email}}</td>
+          <td>{{d.branch}}</td>
+          <td>{{d.course}}</td>
+          <td>{{d.batchname}}</td>
+          <td>
+              <input type="file" name="assignment" (change)="getAssignment($event)"></td>
+          <button (click)="postData()">Submit</button>
+        
+        </tr>
+      </tbody>
+    </table> -->
+    <div class="container">
+      
+      <!-- Button to Open the Modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Upload Assignment
+      </button>
+    
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Modal Heading</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form #f = "ngForm">
+                <div class="form-group">
+                  <label for="inputcourseid">CourseId</label>
+                  <select  class="form-control" name="courseid"  #n ="ngModel"
+                  [(ngModel)]="courseid">
+                       <option value="Select">Select</option>
+                      <option *ngFor = "let d of datas">
+                          {{d.courseid}}
+                      </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputfile">Upload Files:</label>
+                  <input type="file" class="form-control" id=file 
+                  (change)="getAssignment($event)">
+                </div>
+               <div class="form-group">
+                 <label for="indescription">Description</label>
+                 <textarea name="description" #d ="ngModel" [(ngModel)] ="description" 
+                 class="form-control" 
+                 id="description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="f.invalid"
+                (click)="postData()">Submit</button>
+              </form>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    

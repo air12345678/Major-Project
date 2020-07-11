@@ -29,6 +29,7 @@ datas:any
       gender:['',Validators.required],
       branch:['',Validators.required],
       course:['',Validators.required],
+      courseid:['',Validators.required],
       batchname:['',Validators.required],
       dateofbirth:['',Validators.required],
       address:['',Validators.required]

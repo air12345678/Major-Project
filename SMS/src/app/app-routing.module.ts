@@ -17,6 +17,11 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { ViewcourseComponent } from './viewcourse/viewcourse.component';
 import { DetailsprofileComponent } from './detailsprofile/detailsprofile.component';
 import { ChangeComponent } from './change/change.component';
+import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
+import { ViewAssignmentComponent } from './view-assignment/view-assignment.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AssignmentComponent } from './assignment/assignment.component';
+
 
 
 
@@ -26,6 +31,7 @@ const routes: Routes = [
       {path:'contactus',component:ContactusComponent},
       {path:'login',component:LoginComponent},
       {path:'change',component:ChangeComponent},
+      {path:'forgot-password',component:ForgotPasswordComponent},
       {path:'dashboard',component:DashboardComponent,
     children:[
       {path:'create-student',component:CreateStudentComponent,canActivate:[AuthguardService]},
@@ -36,11 +42,14 @@ const routes: Routes = [
       {path:'completeprofile',component:CompleteprofileComponent},
       {path:'add-course',component:AddCourseComponent},
       {path:'viewcourse',component:ViewcourseComponent},
-      {path:'detailsprofile',component:DetailsprofileComponent,canActivate:[AuthguardService]}
-    ]},
+      {path:'detailsprofile',component:DetailsprofileComponent,canActivate:[AuthguardService]},
+      {path:'upload-assignment',component:UploadAssignmentComponent},
+      {path:'view-Assignment',component:ViewAssignmentComponent},
+      {path:'assignment',component:AssignmentComponent}
+  
       
       
-];    
+]  }  ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
