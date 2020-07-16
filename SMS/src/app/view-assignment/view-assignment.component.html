@@ -1,6 +1,31 @@
-<!-- <button class="btn btn-primary" (click)="submit()">View Assignment</button> -->
-<div *ngFor="let a of assignment">
-<a href="http://localhost:3000/{{a._id}}_assignment_1.{{a.ext}}" download>Assignment
-<i class="fa fa-download" aria-hidden="true"></i></a><br>
-Desrciption: {{a.description}}
-</div>
+
+ <div class="container">
+    <table class="table table-striped css-serial">
+        <thead>
+            <tr>
+                <th>Sr.No.</th>
+                <th>Title</th>
+                <th>Course Id</th>
+                <th>Assignment</th>
+                <th>Description</th>
+                <th *ngIf="role=='Admin'">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of assignment">
+                    <td>&nbsp;</td>
+                    <td>{{a.title}}</td>
+                    <td>{{a.courseid}}</td>
+                    <td><a href="http://localhost:3000/{{a._id}}_assignment_1.{{a.ext}}" download>Assignment
+                        <i class="fa fa-download" aria-hidden="true"></i></a></td>
+                    <td>{{a.description}}</td>
+                    <td *ngIf="role=='Admin'">
+                        <button class="btn btn-primary"
+                         (click)="delete(a)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+ </div>
+
+

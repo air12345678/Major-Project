@@ -45,7 +45,6 @@ export class createteacher{
 export class addcourses{
     courseid:string;
     coursename:string;
-    // teachername:string;
 }
 
 export class change{

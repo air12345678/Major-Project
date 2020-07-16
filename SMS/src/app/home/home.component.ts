@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 declare var $:any;
-declare var Waypoint :any
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,9 +13,20 @@ export class HomeComponent implements OnInit {
   }
   ngAfterViewInit(){
     $(document).ready(function(){
-    $('.card--part1').scroll(function(){
-      $('.card--part1').animate({left: '250px'});
+    
+      $('.card--part1').mouseover(function(){
+        $('.card--part1').css({backgroundColor:'skyblue'},{duration:500})
+      })
+      .mouseout(function(){
+        $('.card--part1').css({backgroundColor:'white'},{duration:500})
+      })
+        
+        $(window).scroll(function(){
+          $('.card--part1').animate({zoom:'1.2',},{duration:500,
+          easing:"linear"})
+        })
+  
     })
-    })
+  
   }
 }

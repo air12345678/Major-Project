@@ -11,6 +11,7 @@ export class UploadAssignmentComponent implements OnInit {
 datas
 prop:string
 assignment
+title
 courseid
 description
 ext
@@ -32,6 +33,7 @@ ext
   }
   postData(){
    var form = new FormData();
+   form.set('title',this.title);
    form.set('courseid',this.courseid);
    
    form.set('description',this.description);
@@ -39,7 +41,7 @@ ext
    form.set('assignment',this.assignment);
    this.ds.postDataWithImage(form)
    .subscribe((d)=>{
-    alert(JSON.stringify(d))
+    alert("Assignment Uploaded Successfully")
    })
   
   

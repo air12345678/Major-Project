@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row" *ngFor="let d of datas">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <label>Name</label>:{{d.name}}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <label>Email</label>:{{d.email}}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <label>Password</label>:{{d.password}}
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <label>Role</label>:{{d.role}}
+        </div>
+        <button class="btn btn-primary" data-toggle="modal" 
+            data-target="#myModal"(click)="update(d)">update</button>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+           <!-- Modal body -->
+           <div class="modal-body">
+            <div *ngIf="tobeupdated" class="container-fluid">
+                <form novalidate [formGroup]="studentForm" (ngSubmit)="onsubmit()">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                <label for="inpurname">Name</label>
+            <input type="text" name="name" placeholder="Name" formControlName="name" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" [(ngModel)]="tobeupdated.name">
+            <div *ngIf="submitted && f.name.errors"
+            class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Name is required</div></div>
+                      
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputeamil">Email</label>
+                        <input type="email" name="email" placeholder="Email" class="form-control"
+                        formControlName="email"[ngClass]="{ 'is-invalid': submitted && f.email.errors }" 
+                        [(ngModel)]="tobeupdated.email">
+                        <div *ngIf="submitted && f.email.errors"
+            class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                       <label for="inputpass">Password</label>
+                    <input type="password" name="password" placeholder="Password" 
+                    formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" 
+                    [(ngModel)]="tobeupdated.password">
+                    <div *ngIf="submitted && f.password.errors"
+            class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <label for="inputroles">Roles</label>
+                        <select  class="form-control" disabled
+                         name="role" id="role" placeholder = "role" 
+                         formControlName="role" 
+                         [ngClass]="{ 'is-invalid': submitted && f.role.errors }" 
+                         [(ngModel)]="tobeupdated.role">
+                            <option value="Select">Role</option>
+                            <option *ngFor = "let role of roles">
+                                {{role}}
+                            </option>
+                            <div *ngIf="submitted && f.role.errors"
+            class="invalid-feedback">
+        <div *ngIf="f.role.errors.required">Roles is required</div></div>
+                        </select>
+                    </div>
+                        <button>Update</button>
+                    </div>
+                </form>
+            </div>
+           </div>
+            </div>
+        </div>
+    </div>
+</div>

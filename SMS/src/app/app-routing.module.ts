@@ -20,7 +20,10 @@ import { ChangeComponent } from './change/change.component';
 import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
 import { ViewAssignmentComponent } from './view-assignment/view-assignment.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AssignmentComponent } from './assignment/assignment.component';
+import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
+import { SubmittedAssignmentsComponent } from './submitted-assignments/submitted-assignments.component';
+import { UsersComponent } from './users/users.component';
+import { LoginDetailsComponent } from './login-details/login-details.component';
 
 
 
@@ -45,8 +48,11 @@ const routes: Routes = [
       {path:'detailsprofile',component:DetailsprofileComponent,canActivate:[AuthguardService]},
       {path:'upload-assignment',component:UploadAssignmentComponent},
       {path:'view-Assignment',component:ViewAssignmentComponent},
-      {path:'assignment',component:AssignmentComponent}
-  
+      {path:'submit-assignment',component:SubmitAssignmentComponent},
+      {path:'submitted-assignment',component:SubmittedAssignmentsComponent},
+      {path:'users',component:UsersComponent},
+      {path:'login-details',component:LoginDetailsComponent}
+      
       
       
 ]  }  ]

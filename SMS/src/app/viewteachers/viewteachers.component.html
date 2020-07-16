@@ -5,7 +5,7 @@
   
     </div>
 
-    <div *ngIf="(datas | filter:searchTerm).length==0">
+    <div *ngIf="(datas | filterTeacher:searchTerm).length==0">
       <h3>Oh no</h3>
       <p>No Teacher found <span *ngIf="searchTerm"> with search "{{searchTerm}}"</span> </p>
     </div>
@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let d of datas | filter:searchTerm">
+          <tr *ngFor="let d of datas | filterTeacher:searchTerm">
             <td>{{d.id}}</td>
             <td>{{d.name}}</td>
             <td>{{d.email}}</td>

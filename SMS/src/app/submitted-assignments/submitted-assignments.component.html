@@ -1,0 +1,29 @@
+
+<div class="container">
+    <table class="table table-striped css-serial">
+        <thead>
+            <tr>
+                <th>Sr.No.</th>
+                <th>Name</th>
+                <th>Course Id</th>
+                <th>Assignment</th>
+                <th *ngIf="role=='Admin'">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of assignment">
+                    <td>&nbsp;</td>
+                    <td>{{a.name}}</td>
+                    <td>{{a.courseid}}</td>
+                    <td><a href="http://localhost:3000/{{a._id}}_assignment_1.{{a.ext}}" download>Assignment
+                        <i class="fa fa-download" aria-hidden="true"></i></a></td>
+                    <td *ngIf="role=='Admin'">
+                        <button class="btn btn-primary"
+                         (click)="delete(a)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+ </div>
+
+

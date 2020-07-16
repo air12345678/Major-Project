@@ -46,11 +46,47 @@ var storage = multer.diskStorage({
   }
 })
 
+var storage1 = multer.diskStorage({
+  destination:function(req,file,cb){
+    console.log("in destination");
+    cb(null, 'Submit')
+  },
+  filename:function(req,file,cb){
+    console.log(file);
+    var ext = file.originalname.split('.').pop();
+    console.log(ext);
+   console.log(req.body)
+    if(!req.hasTextDataProcessed){
+      var collection = connection.db('smsdb').collection('submitassignments');
+      collection.insert(req.body,(err,r)=>{
+        if(!err){
+          console.log(r);
+          var insertedId = r.insertedIds['0'];
+          
+          console.log("inserted id is returned as->"+insertedId)
+          req.hasTextDataProcessed = true;
+          req.insertedId = insertedId; 
+          
+          req.assignmentCtr = 1;
+          cb(null,req.insertedId+"_"+file.fieldname+"_"+req[file.fieldname+'Ctr']++ +"."+ext);
+         console.log(req.courseid)
+        }
+        else{
+          return null;
+        }
+      })
+    }
+    else{
+      cb(null,req.insertedId+"_"+file.fieldname+"_"+req[file.fieldname+'Ctr']++ +"."+ext);
+    }
+  }
+})
 var upload = multer({storage:storage})
+var upload1 = multer({storage:storage1})
 var app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname,'uploads')))
-
+app.use(express.static(path.join(__dirname,'Submit')))
 // //////////////////DataBase Conncetion///////////////////////////////////////
 let client = new MongoClient("mongodb://localhost:27017/smsdb",{useNewurlParser:true});
 var connection;
@@ -74,6 +110,14 @@ upload.fields([{name:'assignment',maxcount:1}]),
   console.log("in last"); 
   res.send({status:"ok"})   
   });
+
+  app.post('/Submit-assignment',
+upload1.fields([{name:'assignment',maxcount:1}]),
+                            
+(req,res)=>{
+  console.log("in last"); 
+  res.send({status:"ok"})   
+  });
 app.get('/get-assignments',(req,res)=>{
   // console.log(req.body);
   var collection=connection.db('smsdb').collection('assignments');
@@ -88,6 +132,45 @@ app.get('/get-assignments',(req,res)=>{
           res.send({Status:"failed",resultData:err});
       }
   })
+})
+app.get('/submitted-assignments',(req,res)=>{
+  // console.log(req.body);
+  var collection=connection.db('smsdb').collection('submitassignments');
+  collection.find().toArray((err,docs)=>{
+      if(!err)
+      {
+          res.send({Status:"Ok",resultData:docs});
+        
+      }
+      else
+      {
+          res.send({Status:"failed",resultData:err});
+      }
+  })
+})
+app.post('/delete-assignment',bodyparser.json(), (req,res)=>{
+  console.log(req.body);
+  var collection =connection.db('smsdb').collection('assignments');
+collection.remove({_id:ObjectId(req.body._id)},(err,r)=>{
+  if(!err){
+      res.send({status:"Ok"});
+  }
+  else{
+      res.send({status:"failed"});
+  }
+})
+})
+app.post('/delete-submit-assignment',bodyparser.json(), (req,res)=>{
+  console.log(req.body);
+  var collection =connection.db('smsdb').collection('submitassignments');
+collection.remove({_id:ObjectId(req.body._id)},(err,r)=>{
+  if(!err){
+      res.send({status:"Ok"});
+  }
+  else{
+      res.send({status:"failed"});
+  }
+})
 })
 app.post('/sign-up',bodyparser.json(),(req,res)=>{
     console.log(req.body);
@@ -131,10 +214,61 @@ app.post('/login',bodyparser.json(), (req,res)=>{
        
     })
 })
+app.get('/users',bodyparser.json(),(req,res)=>{
+  var collection =connection.db('smsdb').collection('users');
+  collection.find().toArray((err,docs)=>{
+    if(!err && docs.length > 0){
+      console.log(docs)
+      res.send({status:"Ok",resultData:docs})
+  }
+  else{
+      res.send({status:"failed",resultData:err})
+  }
+  })
+})
+app.post('/delete-user',bodyparser.json(), (req,res)=>{
+  console.log(req.body);
+  var collection =connection.db('smsdb').collection('users');
+collection.remove({_id:ObjectId(req.body._id)},(err,r)=>{
+  if(!err){
+      res.send({status:"Ok"});
+  }
+  else{
+      res.send({status:"failed"});
+  }
+})
+})
+app.post('/userdetails',bodyparser.json(), (req,res)=>{
+  var collection =connection.db('smsdb').collection('users');
+  var query = {email:req.body.email}
+  console.log(req.body);
+  collection.find(query).toArray((err,docs)=>{
+      if(!err && docs.length > 0){
+          console.log(docs)
+          res.send({status:"Ok",resultData:docs})
+      }
+      else{
+          res.send({status:"failed",resultData:err})
+      }
+     
+  })
+})
+app.post('/user-update',bodyparser.json(),(req,res)=>{
+  var collection =connection.db('smsdb').collection('users');
+  collection.update({_id:ObjectId(req.body._id)},{$set:{name:req.body.name,
+  email:req.body.email,password:req.body.password,role:req.body.role}},(err,r)=>{
+    if(!err){
+      res.send({status:"Ok"})
+      console.log("Document Updated");
+    }
+    else{
+      res.send({status:"failed"})
+    }
+  })
+})
 app.post('/forgot-password',bodyparser.json(),(req,res)=>{
   console.log(req.body);
   var collection =connection.db('smsdb').collection('users');
-  var query = {email:req.body.email}
   collection.find({email:req.body.email}).toArray((err,docs)=>{
     if(!err && docs.length > 0){
       res.send({Status:"Ok",resultData:docs});
@@ -208,9 +342,10 @@ app.put('/update-student',bodyparser.json(), (req,res)=>{
   var collection =connection.db('smsdb').collection('students');
 collection.update({_id:ObjectId(req.body._id)},
      {$set:{name:req.body.name,fathername:req.body.fathername,email:req.body.email,
-      contactno:req.body.contactno,gender:req.body.gender,branch:req.body.branch,
+      contactno:req.body.contactno, gender:req.body.gender, branch:req.body.branch,
       course:req.body.course, teachername:req.body.teachername
-      ,dateofbirth:req.body.dateofbirth,address:req.body.address}},(err,r)=>{
+      ,dateofbirth:req.body.dateofbirth,address:req.body.address,
+    batchname:req.body.batchname, courseid:req.body.courseid}},(err,r)=>{
   if(!err){
       res.send({status:"Ok"});
       console.log("1 document updated");

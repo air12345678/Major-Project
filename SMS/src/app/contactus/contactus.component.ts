@@ -19,10 +19,6 @@ submit(){
     if(data.status == "Ok")
     {
       alert("contactus succesfully");
-      this.ds.sendEmail(this.contactus_ob).subscribe((data)=>
-      {
-        console.log(data);
-      })
       alert("Email sent");
     }
     else{

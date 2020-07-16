@@ -42,6 +42,7 @@ submitted = false;
     gender:['',Validators.required],
     branch:['',Validators.required],
     course:['',Validators.required],
+    courseid:['',Validators.required],
     batchname:['',Validators.required],
     dateofbirth:['',Validators.required],
     address:['',Validators.required]
@@ -63,12 +64,10 @@ update(s){
  }
 onsubmit(){
   this.submitted = true;
-  if (this.studentForm.invalid) {
-    return;
-}
+  
 this.ds.getupdate(this.tobeupdated)
 .subscribe((d)=>{
-  if(d.status="Ok"){
+  if(d.status=="Ok"){
     this.ds.getstudents().subscribe((d)=>{
       this.datas =d.resultData;
     })

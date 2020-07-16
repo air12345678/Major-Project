@@ -26,7 +26,11 @@ import { FilterTeacherPipe } from './pipes/filter-teacher.pipe';
 import { UploadAssignmentComponent } from './upload-assignment/upload-assignment.component';
 import { ViewAssignmentComponent } from './view-assignment/view-assignment.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AssignmentComponent } from './assignment/assignment.component';
+import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
+import { SubmittedAssignmentsComponent } from './submitted-assignments/submitted-assignments.component';
+import { FilterAssignmentPipe } from './pipes/filter-assignment.pipe';
+import { UsersComponent } from './users/users.component';
+import { LoginDetailsComponent } from './login-details/login-details.component';
 
 
 
@@ -55,7 +59,11 @@ import { AssignmentComponent } from './assignment/assignment.component';
     UploadAssignmentComponent,
     ViewAssignmentComponent,
     ForgotPasswordComponent,
-    AssignmentComponent
+    SubmitAssignmentComponent,
+    SubmittedAssignmentsComponent,
+    FilterAssignmentPipe,
+    UsersComponent,
+    LoginDetailsComponent
    
   ],
   imports: [

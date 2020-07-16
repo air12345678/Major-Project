@@ -1,0 +1,27 @@
+<div class="container">
+<table class="table table-striped css-serial">
+    <thead>
+      <tr>
+        <th> Sr no</th>
+        
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of datas">
+        <td>&nbsp;</td>
+        <td>{{d.name}}</td>
+        <td>{{d.email}}</td>
+        <td>{{d.password}}</td>
+        <td>{{d.role}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="delete(d)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

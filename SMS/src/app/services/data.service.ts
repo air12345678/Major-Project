@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import { Signup, Login, createstudent, createteacher, addcourses } from '../models/form-model';
+import { Signup, Login, createstudent, createteacher, addcourses, contactusdetails } from '../models/form-model';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,21 +14,16 @@ export class DataService {
   login(l:Login):any{
   return this.http.post('http://localhost:3000/login',l);
   }
-  contactus_info(var_ob):any
+  contactus_info(var_ob:contactusdetails):any
   {
     console.log("hey there", var_ob);
     return this.http.post("http://localhost:3000/contactus",var_ob)
-  }
-  sendEmail(info):any
-  {
-    console.log("send mail", info);
-    return this.http.post("http://localhost:3000/email",info);  
   }
   createStudent(c:createstudent):any{
     return this.http.post("http://localhost:3000/create-student",c);
   }
 
-studentdetail(c:createstudent):any{
+studentdetail(c):any{
   return this.http.post("http://localhost:3000/studentdetail",c);
 }
 getstudents():any{
@@ -77,5 +72,31 @@ getassignments():any{
 }
 forgotpassword(d:Login):any{
   return this.http.post('http://localhost:3000/forgot-password',d);
+}
+deleteassignment(d):any{
+  return this.http.post('http://localhost:3000/delete-assignment',d);
+
+}
+submitassignment(d):any{
+  return this.http.post('http://localhost:3000/Submit-assignment', d);
+}
+getsubmittedassignment():any{
+  return this.http.get('http://localhost:3000/submitted-assignments');
+}
+deletesubmitassignment(d):any{
+  return this.http.post('http://localhost:3000/delete-submit-assignment', d);
+}
+users():any{
+  return this.http.get('http://localhost:3000/users');
+}
+deleteuser(d):any{
+  return this.http.post('http://localhost:3000/delete-user',d);
+}
+userdetails(u):any{
+  return this.http.post('http://localhost:3000/userdetails',u);
+
+}
+userupdate(u):any{
+  return this.http.post('http://localhost:3000/user-update',u);
 }
 }
