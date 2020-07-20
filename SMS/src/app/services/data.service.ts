@@ -45,7 +45,7 @@ createTeacher(c:createteacher):any{
 getteachers():any{
   return this.http.get("http://localhost:3000/getteachers");
 }
-teacherdetails(c:createteacher):any{
+teacherdetails(c):any{
   return this.http.post("http://localhost:3000/teacherdetail",c);
 }
 deleteteacher(u):any{
@@ -67,8 +67,14 @@ postDataWithImage(d)
 {
   return this.http.post('http://localhost:3000/data-with-file', d);
 }
+postprofile(p){
+  return this.http.post('http://localhost:3000/post-profile',p);
+}
 getassignments():any{
   return this.http.get('http://localhost:3000/get-assignments');
+}
+getprofilepicture():any{
+  return this.http.get('http://localhost:3000/getprofile');
 }
 forgotpassword(d:Login):any{
   return this.http.post('http://localhost:3000/forgot-password',d);

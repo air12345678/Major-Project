@@ -1,21 +1,23 @@
 table{
     width: 500px; /* For Responsive design set 100% */
     border-collapse: collapse;
-    margin: 30px 0px 30px;
+    margin: 30px 50px 30px;
     background-color: #fff;
     font-size: 14px;
     }
    table tr {
     height: 40px;
+   
     }
    table th {
     background: #333;
     color: #fff;
     font-weight: bold;
     font-size: 18px;
+    
    }
    table td, th {
-    padding: 6px 6px 6px 10px;
+    padding: 6px 16px 6px 10px;
     border: 1px solid #ccc;
     text-align:center;
    }

@@ -15,7 +15,8 @@ datas:any
   studentForm :FormGroup;
   createstudent:createstudent;
   submitted = false;
-  createcourse:addcourses
+  createcourse:addcourses;
+ 
   constructor(private fb:FormBuilder,private ds:DataService,private router:Router,
     private route:ActivatedRoute) { }
 
@@ -33,6 +34,7 @@ datas:any
       batchname:['',Validators.required],
       dateofbirth:['',Validators.required],
       address:['',Validators.required]
+    
     });
     this.ds.getcourses()
     .subscribe((d)=>{
@@ -45,11 +47,13 @@ datas:any
   get f() {
     return this.studentForm.controls;
   }
+  
   onsubmit(){
     this.submitted = true;
     if (this.studentForm.invalid) {
       return;
   }
+
   this.createstudent = this.studentForm.value;
   this.ds.createStudent(this.createstudent)
   .subscribe((d)=>{

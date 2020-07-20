@@ -19,7 +19,6 @@
           <th>Branch</th>
           <th>Course</th>
           <th>Batch</th>
-
           <th>Operations</th>
         </tr>
       </thead>
@@ -31,12 +30,11 @@
           <td>{{d.email}}</td>
           <td>{{d.branch}}</td>
           <td>{{d.course}}</td>
-          <td>{{d.batchname}}</td>
-        
+          <td>{{d.batchname}}</td>        
           <td><button class="btn btn-primary" data-toggle="modal" 
             data-target="#myModal"(click)="update(d)">update</button></td>
           <td><button class="btn btn-primary" (click)="delete(d)">Delete</button></td>
-          <td><button class="btn btn-primary" (click)="details(d)">Details</button></td>
+       <td><button class="btn btn-primary" (click)="details(d)">Details</button></td>
         </tr>
       </tbody>
     </table>

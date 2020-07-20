@@ -12,8 +12,20 @@
                 <div class="bottom-border pb-3">
                   <img *ngIf="role=='Admin'" src="/../assets/admin.jpg" width="50" class="rounded-circle mr-3">
                   <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Admin'">Hello {{role}}</a>
-                  <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Student' || role=='Teacher'">Hello {{name}}</a>
-                </div>
+                  
+                  <div  *ngFor="let p of profile" >
+                  <img  *ngIf="role=='Student'" width="50" class="rounded-circle mr-3" 
+                  src="http://localhost:3000/{{p._id}}_Profile_1.{{p.ext}}">
+                  <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Student'">Hello {{name}}</a>
+                  </div>
+
+                  <div  *ngFor="let P of Profile" >
+                    <img  *ngIf="role=='Teacher'" width="50" class="rounded-circle mr-3" 
+                    src="http://localhost:3000/{{P._id}}_Profile_1.{{P.ext}}">
+                    <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Teacher'">Hello {{name}}</a>
+                    </div>
+               </div>
+            
                 <ul class="navbar-nav flex-column mt-4">
                   <li class="nav-item"><a routerLink="/dashboard/profile" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a></li>
                   <li class="nav-item"><a routerLink="/dashboard/profile" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg mr-3"></i>Profile</a></li>

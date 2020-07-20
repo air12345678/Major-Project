@@ -46,5 +46,7 @@ ext
   
   
  }
-
+ viewassignment(){
+   this.router.navigate(['/dashboard/view-Assignment'])
+ }
 }

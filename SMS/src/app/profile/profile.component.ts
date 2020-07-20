@@ -16,6 +16,10 @@ createstudents:createstudent
 login:Login
  createteachers:createteacher
   role;
+  name;
+  email
+  Profile
+  ext
   constructor(private ds:DataService,private router:Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -42,6 +46,19 @@ login:Login
 submit(){
  this.router.navigate(['/dashboard/completeprofile'])
 }
-
- 
+getprofile(e){
+  this.Profile = e.target.files[0];
+  this.ext = this.Profile.name.split('.').pop()
+}
+ postData(){
+  var form = new FormData();
+  form.set('name',this.name);
+  form.set('email',this.email);
+  form.set('ext',this.ext);
+  form.set('Profile',this.Profile);
+  this.ds.postprofile(form)
+  .subscribe((d)=>{
+    alert("Profile Picture Uploaded Successfully");
+  })
+ }
 }
