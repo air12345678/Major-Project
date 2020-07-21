@@ -14,7 +14,7 @@
                   <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Admin'">Hello {{role}}</a>
                   
                   <div  *ngFor="let p of profile" >
-                  <img  *ngIf="role=='Student'" width="50" class="rounded-circle mr-3" 
+                  <img  *ngIf="role=='Student'" width="50" height="50" class="rounded-circle mr-3" 
                   src="http://localhost:3000/{{p._id}}_Profile_1.{{p.ext}}">
                   <a routerLink="/dashboard/completeprofile" class="text-white" *ngIf="role=='Student'">Hello {{name}}</a>
                   </div>
