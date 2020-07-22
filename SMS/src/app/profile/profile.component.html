@@ -84,11 +84,25 @@
       [(ngModel)]="email">
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12">
-                <label for="inputimage">Profile</label>
+                <!-- <label for="inputimage">Profile</label>
                 <input type="file" class="form-control" name="Profile"
-                id="file" (change)="getprofile($event)">
+                id="file" (change)="getprofile($event)"> -->
+                
+                <div class="circle bg-dark">
+                 
+                  <!-- User Profile Image -->
+                  <img class="profile-pic" src="http://cdn.cutestpaw.com/wp-content/uploads/2012/07/l-Wittle-puppy-yawning.jpg">
+                  <i class="fa fa-camera upload-button ml-5 p-4" ></i>
+                   <input class="file-upload" type="file" accept="image/*"name="Profile"
+                   (change)="getprofile($event)"/>
+                </div>
+                
     </div>
-    <button class="btn btn-primary" (click)="postData()">Submit</button>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+ <button class="btn btn-primary" (click)="postData()">Submit</button>
+    </div>
   </div>
+  
   </form>
+ 
 </div>

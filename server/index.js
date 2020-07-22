@@ -104,7 +104,7 @@ var storage2 = multer.diskStorage({
 
           req.ProfileCtr = 1;
           cb(null, req.insertedId + "_" + file.fieldname + "_" + req[file.fieldname + 'Ctr']++ + "." + ext);
-         
+
         }
         else {
           return null;
@@ -118,12 +118,12 @@ var storage2 = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 var upload1 = multer({ storage: storage1 })
-var upload2 = multer({storage:storage2});
+var upload2 = multer({ storage: storage2 });
 var app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'uploads')))
 app.use(express.static(path.join(__dirname, 'Submit')))
-app.use(express.static(path.join(__dirname,'profilepictures')))
+app.use(express.static(path.join(__dirname, 'profilepictures')))
 // //////////////////DataBase Conncetion///////////////////////////////////////
 let client = new MongoClient("mongodb://localhost:27017/smsdb", { useNewurlParser: true });
 var connection;
@@ -155,11 +155,11 @@ app.post('/Submit-assignment',
     console.log("in last");
     res.send({ status: "ok" })
   });
-  app.post('/post-profile',
-  upload2.fields([{name:'Profile',maxCount:1}]),
-  (req,res)=>{
+app.post('/post-profile',
+  upload2.fields([{ name: 'Profile', maxCount: 1 }]),
+  (req, res) => {
     console.log("in Last");
-    res.send({status:"ok"})
+    res.send({ status: "ok" })
   })
 app.get('/get-assignments', (req, res) => {
   // console.log(req.body);
@@ -187,9 +187,9 @@ app.get('/submitted-assignments', (req, res) => {
     }
   })
 })
-app.get('/getprofile',(req,res)=>{
+app.get('/getprofile', (req, res) => {
   var collection = connection.db('smsdb').collection('profilepictures');
-  collection.find().toArray((err,docs)=>{
+  collection.find().toArray((err, docs) => {
     if (!err) {
       res.send({ Status: "Ok", resultData: docs });
 
