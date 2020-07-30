@@ -125,7 +125,7 @@ app.use(express.static(path.join(__dirname, 'uploads')))
 app.use(express.static(path.join(__dirname, 'Submit')))
 app.use(express.static(path.join(__dirname, 'profilepictures')))
 // //////////////////DataBase Conncetion///////////////////////////////////////
-let client = new MongoClient("mongodb://localhost:27017/smsdb", { useNewurlParser: true });
+let client = new MongoClient("mongodb+srv://kk221997:6aQvU4llIFxyoFcW@cluster0.anh6a.mongodb.net/smsdb?retryWrites=true&w=majority", { useNewurlParser: true });
 var connection;
 client.connect((err, con) => {
   if (!err) {

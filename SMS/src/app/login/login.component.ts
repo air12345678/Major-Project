@@ -85,7 +85,7 @@ validationMessages = {
     .subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
-roles=['Admin','Student','Teacher']
+roles=['Student','Teacher']
   OnValueChanged(data?:any){
     if(!this.signupForm){return;}
     const form = this.signupForm;
